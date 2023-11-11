@@ -76,7 +76,13 @@ function wpstd_theme_init()
 
 add_action('after_setup_theme', 'wpstd_theme_init', 0);
 
+function wpstd_custom_search()
+{
+	$form = "html for form";
+	return $form;
+}
 
+add_filter('get_search_form', 'wpstd_custom_search');
 
 
 if (!defined('_S_VERSION')) {
