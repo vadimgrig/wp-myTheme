@@ -21,6 +21,20 @@
 	<?php wp_head() ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class("body_my_class secondary"); ?>>
 	<?php wp_body_open(); ?>
-	тест1
+
+	<?php
+	wp_nav_menu(
+		array(
+			'theme_location' => 'header_nav',
+			'menu_id' => 'head_nav',
+			'menu_class' => 'head__nav-class',
+			'container' => 'div',
+			'before' => 'текст',
+			'link_before' => '1111',
+
+		)
+	);
+	get_search_form();
+	?>

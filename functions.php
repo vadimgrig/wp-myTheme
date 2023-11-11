@@ -22,7 +22,7 @@ function wpstd_enqueue_scripts()
 
 add_action('wp_enqueue_scripts', 'wpstd_enqueue_scripts');
 
-
+// добавление параметров в head посредством хуков
 function wpstd_show_meta()
 {
 	echo "<meta name='author' content='vadimadmin'>";
@@ -36,7 +36,45 @@ function wpstd_show_meta2()
 add_action('wp_head', 'wpstd_show_meta'); //третій параметр передає приорітет в ієрархії
 add_action('wp_head', 'wpstd_show_meta2');
 
+//Хук для добавления класов
 
+function wpstd_body_class($classes)
+{
+	if (is_front_page()) {
+		$classes[] = 'wpstd_body';
+	} elseif (is_singular()) {
+		$classes[] = 'extra_class';
+	}
+
+	return $classes;
+}
+
+add_filter('body_class', 'wpstd_body_class');
+
+
+function wpstd_theme_init()
+{
+	register_nav_menus(array(
+		'header_nav' => 'Header navigation',
+		'footer_nav' => 'Footer navigation',
+		'sidebar_nav' => 'Sidebar navigation'
+	));
+
+	add_theme_support(
+		'html5',
+		array(
+			'search-form',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+			'style',
+			'script',
+		)
+	);
+}
+
+add_action('after_setup_theme', 'wpstd_theme_init', 0);
 
 
 
@@ -82,28 +120,17 @@ function wpstd_setup()
 	add_theme_support('post-thumbnails');
 
 	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus(
-		array(
-			'menu-1' => esc_html__('Primary', 'wpstd'),
-		)
-	);
+	// register_nav_menus(
+	// 	array(
+	// 		'menu-1' => esc_html__('Primary', 'wpstd'),
+	// 	)
+	// );
 
 	/*
 		* Switch default core markup for search form, comment form, and comments
 		* to output valid HTML5.
 		*/
-	add_theme_support(
-		'html5',
-		array(
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-			'style',
-			'script',
-		)
-	);
+
 
 	// Set up the WordPress core custom background feature.
 	add_theme_support(
