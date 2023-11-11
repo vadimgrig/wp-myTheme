@@ -14,8 +14,31 @@ function wpstd_enqueue_scripts()
 	wp_enqueue_script('wpstd-app', get_template_directory_uri() . '/assets/js/app.js', array('jquery'), '1.0.1', true);
 	// wp_enqueue_style('wpstd-general');
 	// wp_enqueue_script('wpstd-app'); можно подключать скрипти в любом месте функцией register регистрируем enqueue обьявляем
+	if (is_singular() && comments_open() && get_option('thread_comments')) {
+		wp_enqueue_script('comment-reply');
+	}
 }
+
+
 add_action('wp_enqueue_scripts', 'wpstd_enqueue_scripts');
+
+
+function wpstd_show_meta()
+{
+	echo "<meta name='author' content='vadimadmin'>";
+}
+
+function wpstd_show_meta2()
+{
+	echo "<meta name='author' content='vadimadmin2'>";
+}
+
+add_action('wp_head', 'wpstd_show_meta'); //третій параметр передає приорітет в ієрархії
+add_action('wp_head', 'wpstd_show_meta2');
+
+
+
+
 
 
 if (!defined('_S_VERSION')) {
@@ -158,35 +181,33 @@ function wpstd_scripts()
 
 	// wp_enqueue_script('wpstd-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
-	if (is_singular() && comments_open() && get_option('thread_comments')) {
-		wp_enqueue_script('comment-reply');
+
+	add_action('wp_enqueue_scripts', 'wpstd_scripts');
+
+	/**
+	 * Implement the Custom Header feature.
+	 */
+	require get_template_directory() . '/inc/custom-header.php';
+
+	/**
+	 * Custom template tags for this theme.
+	 */
+	require get_template_directory() . '/inc/template-tags.php';
+
+	/**
+	 * Functions which enhance the theme by hooking into WordPress.
+	 */
+	require get_template_directory() . '/inc/template-functions.php';
+
+	/**
+	 * Customizer additions.
+	 */
+	require get_template_directory() . '/inc/customizer.php';
+
+	/**
+	 * Load Jetpack compatibility file.
+	 */
+	if (defined('JETPACK__VERSION')) {
+		require get_template_directory() . '/inc/jetpack.php';
 	}
-}
-add_action('wp_enqueue_scripts', 'wpstd_scripts');
-
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
-require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if (defined('JETPACK__VERSION')) {
-	require get_template_directory() . '/inc/jetpack.php';
 }
