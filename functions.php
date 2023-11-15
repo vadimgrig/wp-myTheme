@@ -10,6 +10,8 @@
 function wpstd_enqueue_scripts()
 {
 	wp_enqueue_style('wpstd-general', get_template_directory_uri() . '/assets/css/general.css', array(), '1.0.1', 'all');
+	wp_enqueue_style('wpstd-main', get_template_directory_uri() . '/assets/css/main.css', array(), '1.0.1', 'all');
+	wp_enqueue_style('wpstd-form', get_template_directory_uri() . '/assets/css/form.css', array(), '1.0.1', 'all');
 
 	wp_enqueue_script('wpstd-app', get_template_directory_uri() . '/assets/js/app.js', array('jquery'), '1.0.1', true);
 	// wp_enqueue_style('wpstd-general');

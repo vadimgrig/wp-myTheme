@@ -18,6 +18,7 @@
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+
 	<?php wp_head() ?>
 </head>
 
@@ -25,16 +26,38 @@
 	<?php wp_body_open(); ?>
 
 	<?php
-	wp_nav_menu(
-		array(
-			'theme_location' => 'header_nav',
-			'menu_id' => 'head_nav',
-			'menu_class' => 'head__nav-class',
-			'container' => 'div',
-			'before' => 'текст',
-			'link_before' => '1111',
+	// wp_nav_menu(
+	// 	array(
+	// 		'theme_location' => 'header_nav',
+	// 		'menu_id' => 'head_nav',
+	// 		'menu_class' => 'head__nav-class',
+	// 		'container' => 'div',
+	// 		'before' => 'текст',
+	// 		'link_before' => '1111',
 
-		)
-	);
-	get_search_form();
+	// 	)
+	// );
+	// get_search_form();
+
+	$name = 'Vadym <a href="/">Stolyarenko</a> <em>fdfdfdfdfdfdfdf</em> <strong>Loginnnnnnnnnnnnn</strong>';
+
+	// echo esc_html($name);
+
+	// echo esc_attr($name) esc_attr = функция которая проверяет нет 
+
+	// $args = array(
+	// 	'a' => array(
+	// 		'href' => array()
+	// 	),
+	// 	'strong' => array(),
+	// 	'em' => array()
+	// );
+
+	echo wp_kses_post($name);
+
 	?>
+	<!-- <input name="author" value="<?php //echo esc_attr($name) 
+																		?>"> -->
+
+	<!-- <a href="<?php //echo esc_url(home_url("/")); 
+								?>">Link</a> -->
