@@ -52,7 +52,7 @@ function wpstd_body_class($classes)
 }
 
 add_filter('body_class', 'wpstd_body_class');
-
+add_filter('use_block_editor_for_post', '__return_false', 10);
 
 function wpstd_theme_init()
 {
@@ -74,17 +74,66 @@ function wpstd_theme_init()
 			'script',
 		)
 	);
+
+
+	load_theme_textdomain('wpstd', get_template_directory() . '/lang');
+
+	add_theme_support('post-thumbnails');
+	add_theme_support(
+		'post-formats',
+		array(
+			'video',
+			'image',
+			'quote',
+			'gallery'
+		)
+	);
+	add_post_type_support('news', 'post-formats');
 }
 
 add_action('after_setup_theme', 'wpstd_theme_init', 0);
 
-function wpstd_custom_search()
+
+
+
+function wpstd_register_post_type()
 {
-	$form = "html for form";
-	return $form;
+	$labels = array(
+		'name'                  => esc_html_x('News', 'Post type general name', 'wpstd'),
+		'singular_name'         => esc_html_x('New', 'Post type singular name', 'wpstd'),
+		'menu_name'             => esc_html_x('News', 'Admin Menu text', 'wpstd'),
+		'name_admin_bar'        => esc_html_x('New', 'Add New on Toolbar', 'wpstd'),
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => true,
+		'query_var'          => true,
+		'supports'           => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'revisions', 'page-attributes', 'post-formats'),
+		'has_archive' => true,
+		'rewrite' => array('slug' => 'news'),
+		'capability_type' => 'post',
+	);
+
+	register_post_type('News', $args);
 }
 
-add_filter('get_search_form', 'wpstd_custom_search');
+add_action('init', 'wpstd_register_post_type');
+
+
+function wpstd_rewrite_rules()
+{
+	wpstd_register_post_type();
+	flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'wpstd_rewrite_rules');
+// function wpstd_custom_search()
+// {
+// 	$form = "html for form";
+// 	return $form;
+// }
+
+// add_filter('get_search_form', 'wpstd_custom_search');
 
 
 if (!defined('_S_VERSION')) {
@@ -107,7 +156,7 @@ function wpstd_setup()
 		* If you're building a theme based on wpstd, use a find and replace
 		* to change 'wpstd' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain('wpstd', get_template_directory() . '/languages');
+	// load_theme_wpstd('wpstd', get_template_directory() . '/languages');
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support('automatic-feed-links');

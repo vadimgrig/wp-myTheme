@@ -26,6 +26,23 @@
 	<?php wp_body_open(); ?>
 
 	<?php
+	// esc_html__('word', 'Text Domain');
+
+	// esc_html_e('word', 'Text Domain');
+
+	$city = "Odess";
+	$country = "Ukraine";
+
+	printf(esc_html__('My Cyty is %1$s and my country is %2$s', 'wpstd'), $city, $country);
+	$name = 'Vadym';
+	echo wp_kses(__('%1$s <strong>Vadym</strong>', 'wpstd'), array('strong' => array()));
+
+	$rating = '5';
+
+	printf(_n('%s star', '%s stars', $rating, 'wpstd'), $rating);
+
+
+
 	// wp_nav_menu(
 	// 	array(
 	// 		'theme_location' => 'header_nav',
@@ -39,7 +56,7 @@
 	// );
 	// get_search_form();
 
-	$name = 'Vadym <a href="/">Stolyarenko</a> <em>fdfdfdfdfdfdfdf</em> <strong>Loginnnnnnnnnnnnn</strong>';
+	// $name = 'Vadym <a href="/">Stolyarenko</a> <em>fdfdfdfdfdfdfdf</em> <strong>Loginnnnnnnnnnnnn</strong>';
 
 	// echo esc_html($name);
 
@@ -53,7 +70,7 @@
 	// 	'em' => array()
 	// );
 
-	echo wp_kses_post($name);
+	// echo wp_kses_post($name);
 
 	?>
 	<!-- <input name="author" value="<?php //echo esc_attr($name) 
