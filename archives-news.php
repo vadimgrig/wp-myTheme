@@ -5,14 +5,14 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package asc_service
+ * @package wpstd
  */
 
 get_header();
 ?>
 
 <div>
-	asdasdasd
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	<header class="page-header">
 		<?php
 		the_archive_title('<h1 class="page-title">', '</h1>');
@@ -20,7 +20,10 @@ get_header();
 		?>
 	</header><!-- .page-header -->
 
-	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+	<?php
+	$news = new WP_Query(array('post_type' => 'news', 'post_per_page' => 5));
+
+	if ($news->have_posts()) : while ($news->have_posts()) : $news->the_post(); ?>
 
 			<?php get_template_part('parts/content') ?>
 
@@ -30,7 +33,7 @@ get_header();
 
 	<?php endif;  ?>
 </div>
-
+sdfsdf
 <?php
 // get_sidebar();
 get_footer();

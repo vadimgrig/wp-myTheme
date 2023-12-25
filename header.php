@@ -30,16 +30,16 @@
 
 	// esc_html_e('word', 'Text Domain');
 
-	$city = "Odess";
-	$country = "Ukraine";
+	// $city = "Odess";
+	// $country = "Ukraine";
 
-	printf(esc_html__('My Cyty is %1$s and my country is %2$s', 'wpstd'), $city, $country);
-	$name = 'Vadym';
-	echo wp_kses(__('%1$s <strong>Vadym</strong>', 'wpstd'), array('strong' => array()));
+	// printf(esc_html__('My Cyty is %1$s and my country is %2$s', 'wpstd'), $city, $country);
+	// $name = 'Vadym';
+	// echo wp_kses(__('%1$s <strong>Vadym</strong>', 'wpstd'), array('strong' => array()));
 
-	$rating = '5';
+	// $rating = '5';
 
-	printf(_n('%s star', '%s stars', $rating, 'wpstd'), $rating);
+	// printf(_n('%s star', '%s stars', $rating, 'wpstd'), $rating);
 
 
 
