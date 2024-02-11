@@ -21,7 +21,7 @@ get_header();
 	</header><!-- .page-header -->
 
 	<?php
-	$news = new WP_Query(array('post_type' => 'news', 'post_per_page' => 5));
+	$news = new WP_Query(array('post_type' => 'news', 'post_per_page' => 2));
 
 	if ($news->have_posts()) : while ($news->have_posts()) : $news->the_post(); ?>
 
