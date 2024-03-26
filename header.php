@@ -44,15 +44,14 @@
 
 
 	// wp_nav_menu(
-	// 	array(
+	// 	[
 	// 		'theme_location' => 'header_nav',
 	// 		'menu_id' => 'head_nav',
 	// 		'menu_class' => 'head__nav-class',
 	// 		'container' => 'div',
 	// 		'before' => 'текст',
 	// 		'link_before' => '1111',
-
-	// 	)
+	// 	]
 	// );
 	// get_search_form();
 
